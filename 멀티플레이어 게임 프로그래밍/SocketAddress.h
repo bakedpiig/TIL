@@ -23,6 +23,7 @@ public:
 
 private:
 	friend class UDPSocket;
+	friend class TCPSocket;
 	sockaddr_in* GetAsSockAddrIn() {
 		return reinterpret_cast<sockaddr_in*>(&sockAddr);
 	}
