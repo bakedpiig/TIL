@@ -10,6 +10,15 @@ int TCPSocket::Connect(const SocketAddress& inAddress) {
 	return -SocketUtil::GetLastError();
 }
 
+int TCPSocket::Bind(const SocketAddress& inToAddress) {
+	int error = bind(socket, &inToAddress.sockAddr, inToAddress.GetSize());
+	if (error >= 0)
+		return NO_ERROR;
+
+	SocketUtil::ReportError(L"TCPSocket::Bind");
+	return -SocketUtil::GetLastError();
+}
+
 int TCPSocket::Listen(int inBackLog) {
 	int error = listen(socket, inBackLog);
 	if (error >= 0)
@@ -48,4 +57,8 @@ int TCPSocket::Receive(void* inData, int inLen) {
 
 	SocketUtil::ReportError(L"TCPSocket::Receive");
 	return -SocketUtil::GetLastError();
+}
+
+TCPSocket::~TCPSocket() {
+	closesocket(socket);
 }
