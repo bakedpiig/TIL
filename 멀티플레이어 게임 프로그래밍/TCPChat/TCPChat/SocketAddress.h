@@ -3,6 +3,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <WinSock2.h>
+#pragma comment(lib,"Ws2_32.lib")
 using namespace std;
 
 class SocketAddress {
@@ -10,8 +11,8 @@ private:
 	sockaddr sockAddr;
 public:
 	SocketAddress() { }
-	SocketAddress(ADDRESS_FAMILY inFamily, uint32_t inAddress, uint16_t inPort) {
-		GetAsSockAddrIn()->sin_family = inFamily;
+	SocketAddress(uint32_t inAddress, uint16_t inPort) {
+		GetAsSockAddrIn()->sin_family = AF_INET;
 		GetAsSockAddrIn()->sin_addr.S_un.S_addr = htonl(inAddress);
 		GetAsSockAddrIn()->sin_port = htons(inPort);
 	}
@@ -26,10 +27,7 @@ private:
 	friend class UDPSocket;
 	friend class TCPSocket;
 	sockaddr_in* GetAsSockAddrIn() {
-		if (sockAddr.sa_family == AF_INET)
-			return reinterpret_cast<sockaddr_in*>(&sockAddr);
-		else
-			return nullptr;
+		return reinterpret_cast<sockaddr_in*>(&sockAddr);
 	}
 };
 
