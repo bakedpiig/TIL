@@ -3,6 +3,62 @@
 #include <ws2tcpip.h>
 using namespace std;
 
+constexpr int GOOD_SEGMENT_SIZE = 1500;
+bool isGameRunning;
+
+void DoGameLoop() {
+	auto sock = SocketUtil::CreateUDPSocket(INET);
+	sock->SetNonBlockingMode(true);
+
+	while (isGameRunning) {
+		char data[1500];
+		SocketAddress socketAddress;
+
+		int bytesReceived = sock->ReceiveFrom(data, sizeof(data), socketAddress);
+		if (bytesReceived > 0)
+			ProcessReceivedData(data, bytesReceived, socketAddress);
+
+		DoGameFrame();
+	}
+}
+
+void DoTCPLoop() {
+	TCPSocketPtr listenSocket = SocketUtil::CreateTCPSocket(INET);
+	SocketAddress receivingAddress(INADDR_ANY, 48000);
+	if (listenSocket->Bind(receivingAddress) != NO_ERROR)
+		return;
+
+	vector<TCPSocketPtr> readBlockSockets;
+	readBlockSockets.push_back(listenSocket);
+	vector<TCPSocketPtr> readableSockets;
+
+	while (isGameRunning) {
+		if (!SocketUtil::Select(&readBlockSockets, &readableSockets, nullptr, nullptr, nullptr, nullptr))
+			continue;
+
+		for (const TCPSocketPtr& socket : readableSockets) {
+			if (socket == listenSocket)
+			{
+				SocketAddress newClientAddress;
+				auto newSocket = listenSocket->Accept(newClientAddress);
+				readBlockSockets.push_back(newSocket);
+				ProcessNewClient(newSocket, newClientAddress);
+			}
+			else {
+				char segment[GOOD_SEGMENT_SIZE];
+				int dataReceived = socket->Receive(segment, GOOD_SEGMENT_SIZE);
+				if (dataReceived > 0)
+					ProcessDataFromClient(socket, segment, dataReceived);
+			}
+		}
+	}
+}
+
+void ProcessReceivedData(char* data, int dataSize, SocketAddress& socketAddress);
+void DoGameFrame();
+void ProcessNewClient(TCPSocketPtr socket, SocketAddress& client);
+void ProcessDataFromClient(TCPSocketPtr socket, const char* segment, int size);
+
 int main() {
 	WSADATA wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);

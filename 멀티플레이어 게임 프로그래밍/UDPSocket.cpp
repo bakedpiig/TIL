@@ -29,6 +29,23 @@ int UDPSocket::ReceiveFrom(void* inBuffer, int inMaxLength, SocketAddress& outFr
 	return -SocketUtil::GetLastError();
 }
 
+int UDPSocket::SetNonBlockingMode(bool inShouldBeNonBlocking) {
+#if _WIN32
+	u_long arg = inShouldBeNonBlocking ? 1 : 0;
+	int result = ioctlsocket(socket, FIONBIO, &arg);
+#else
+	int flags = fcntl(socket, F_GETFL, 0);
+	flags = inShouldBeNonBlocking ? (flags & ~O_NOBLOCK);
+	int result = fcntl(socket, F_SETFL, flags);
+#endif
+
+	if (result != SOCKET_ERROR)
+		return NO_ERROR;
+
+	SocketUtil::ReportError(L"UDPSocket::SetNonBlockingMode");
+	return SocketUtil::GetLastError();
+}
+
 UDPSocket::~UDPSocket() {
 	closesocket(socket);
 }
