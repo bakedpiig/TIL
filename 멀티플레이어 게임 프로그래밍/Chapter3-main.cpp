@@ -1,7 +1,30 @@
 #define WIN32_LEAN_AND_MEAN
 #include "SocketUtil.h"
+#include "RoboCat.h"
+#include "OutputMemoryStream.h"
+#include "InputMemoryStream.h"
 #include <ws2tcpip.h>
 using namespace std;
+
+void SendRoboCat(int inSocket, const RoboCat* inRoboCat) {
+	OutputMemoryStream stream;
+	inRoboCat->Write(stream);
+	send(inSocket, stream.GetBufferPtr(), stream.GetLength(), 0);
+}
+
+const uint32_t kMaxPacketSize = 1478;
+
+void ReceiveRoboCat(int inSocket, RoboCat* outRoboCat) {
+	char* temporaryBuffer = static_cast<char*>(malloc(kMaxPacketSize));
+	size_t receivedByteCount = recv(inSocket, temporaryBuffer, kMaxPacketSize, 0);
+
+	if (receivedByteCount > 0) {
+		InputMemoryStream stream(temporaryBuffer, static_cast<uint32_t>(receivedByteCount));
+		outRoboCat->Read(stream);
+	}
+	else
+		free(temporaryBuffer);
+}
 
 constexpr int GOOD_SEGMENT_SIZE = 1500;
 bool isGameRunning;

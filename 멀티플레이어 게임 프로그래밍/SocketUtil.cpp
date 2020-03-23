@@ -18,6 +18,10 @@ TCPSocketPtr SocketUtil::CreateTCPSocket(SocketAddressFamily inFamily) {
 	return nullptr;
 }
 
+void SocketUtil::ReportError(const wchar_t* log) {
+
+}
+
 int SocketUtil::GetLastError() {
 	return WSAGetLastError();
 }

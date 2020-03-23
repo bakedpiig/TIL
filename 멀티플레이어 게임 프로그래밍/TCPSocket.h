@@ -1,5 +1,6 @@
 #pragma once
 #include "SocketAddress.h"
+#pragma comment(lib,"Ws2_32.lib")
 
 class TCPSocket;
 using TCPSocketPtr = shared_ptr<TCPSocket>;
