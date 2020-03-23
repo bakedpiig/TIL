@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
+#include "MemoryStream.h"
 
-class InputMemoryStream {
+class InputMemoryStream: public MemoryStream {
 private:
 	char* buffer;
 	uint32_t head;
@@ -17,4 +18,10 @@ public:
 	void Read(void* outData, uint32_t inByteCount);
 	void Read(uint32_t& outData) { Read(&outData, sizeof(outData)); }
 	void Read(int32_t& outData) { Read(&outData, sizeof(outData)); }
+
+	virtual void Serialize(void* ioData, uint32_t inByteCount) {
+		Read(ioData, inByteCount);
+	}
+
+	virtual bool IsInput() const { return true; }
 };
