@@ -1,4 +1,6 @@
 #include "OutputMemoryBitStream.h"
+#include "Endian.h"
+#include "ByteSwapper.h"
 
 void OutputMemoryBitStream::WriteBits(uint8_t inData, size_t inBitCount) {
 	uint32_t nextBitHead = bitHead + static_cast<uint32_t>(inBitCount);
@@ -7,6 +9,9 @@ void OutputMemoryBitStream::WriteBits(uint8_t inData, size_t inBitCount) {
 	
 	uint32_t byteOffset = bitHead >> 3;
 	uint32_t bitOffset = bitHead & 0x7;
+
+	if (STREAM_ENDIANNESS == Endian::BIG)
+		inData = ByteSwap(inData);
 
 	uint8_t currentMask = ~(0xff << bitOffset);
 	buffer[byteOffset] = (buffer[byteOffset] & currentMask) | (inData << bitOffset);

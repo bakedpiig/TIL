@@ -24,3 +24,32 @@ void OutputMemoryStream::Write(const T& inData) {
 
 	Write(&inData, sizeof(inData));
 }
+
+void OutputMemoryStream::Write(const unordered_map<int, int>& inData) {
+	uint32_t mapSize = inData.size;
+	Write(mapSize);
+	for (auto d : inData) {
+		Write(d.first);
+		Write(d.second);
+	}
+}
+
+void OutputMemoryStream::Write(const Affine& inData) {
+	if (inData.matrix[0][0] == 1)
+		Write(true);
+	else {
+		Write(false);
+		Write(inData.matrix[0][0]);
+	}
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = i + 1; j < 4; j++) {
+			Write(inData.matrix[i][j]);
+		}
+	}
+
+	if (inData.matrix[3][3])
+		Write(true);
+	else
+		Write(false);
+}

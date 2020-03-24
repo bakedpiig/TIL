@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
+#include <unordered_map>
 #include "MemoryStream.h"
+#include "Affine.h"
+using namespace std;
 
 class InputMemoryStream: public MemoryStream {
 private:
@@ -18,6 +21,13 @@ public:
 	void Read(void* outData, uint32_t inByteCount);
 	void Read(uint32_t& outData) { Read(&outData, sizeof(outData)); }
 	void Read(int32_t& outData) { Read(&outData, sizeof(outData)); }
+	void Read(unordered_map<int, int>& outData);
+	template<typename T>
+	void Read(T& outData);
+
+	template<typename tKey,typename tValue>
+	void Read(unordered_map<tKey, tValue>& outData);
+	void Read(Affine& outData);
 
 	virtual void Serialize(void* ioData, uint32_t inByteCount) {
 		Read(ioData, inByteCount);
