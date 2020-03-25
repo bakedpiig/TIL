@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일\Type">
+      <UniqueIdentifier>{a5099f56-1a18-46bd-9677-66e147f519ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Network">
+      <UniqueIdentifier>{104e4f5a-9892-4b81-b6d6-5054a53002a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Network\Stream">
+      <UniqueIdentifier>{435e2da1-1870-45c7-9447-d90150e009a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Utility">
+      <UniqueIdentifier>{c1900673-9573-416e-812c-df870069c8b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Type\GameObject">
+      <UniqueIdentifier>{034d443c-7c97-47d0-8361-d37000fb5ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Network\Socket">
+      <UniqueIdentifier>{81450478-58c9-4ec1-b583-ba180ac73dcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Network">
+      <UniqueIdentifier>{bf8e003a-f0b0-4e81-9545-66a9bd3b8bb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Network\Stream">
+      <UniqueIdentifier>{34298626-35a7-4cd4-8bf6-de4675e91fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Network\Socket">
+      <UniqueIdentifier>{a1eda6ce-ac94-4db3-a3df-4d5049288197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Type">
+      <UniqueIdentifier>{c64d3ec5-bb0f-4800-8a65-d2553fbc15f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Type\GameObject">
+      <UniqueIdentifier>{e2268194-bb84-468c-bd5b-42bc11e8c253}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Affine.h">
+      <Filter>헤더 파일\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMemoryBitStream.h">
+      <Filter>헤더 파일\Network\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMemoryStream.h">
+      <Filter>헤더 파일\Network\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryStream.h">
+      <Filter>헤더 파일\Network\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputMemoryBitStream.h">
+      <Filter>헤더 파일\Network\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputMemoryStream.h">
+      <Filter>헤더 파일\Network\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteSwap.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteSwapper.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Endian.h">
+      <Filter>헤더 파일\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseStatus.h">
+      <Filter>헤더 파일\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkingContext.h">
+      <Filter>헤더 파일\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketType.h">
+      <Filter>헤더 파일\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>헤더 파일\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="RelectionSystem.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>헤더 파일\Type\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RoboCat.h">
+      <Filter>헤더 파일\Type\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketAddress.h">
+      <Filter>헤더 파일\Network\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketAddressFactory.h">
+      <Filter>헤더 파일\Network\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>헤더 파일\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="UDPSocket.h">
+      <Filter>헤더 파일\Network\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeAliaser.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketUtil.h">
+      <Filter>헤더 파일\Network\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPSocket.h">
+      <Filter>헤더 파일\Network\Socket</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="InputMemoryStream.cpp">
+      <Filter>소스 파일\Network\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkingContext.cpp">
+      <Filter>소스 파일\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputMemoryBitStream.cpp">
+      <Filter>소스 파일\Network\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputMemoryStream.cpp">
+      <Filter>소스 파일\Network\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="UDPSocket.cpp">
+      <Filter>소스 파일\Network\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPSocket.cpp">
+      <Filter>소스 파일\Network\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketUtil.cpp">
+      <Filter>소스 파일\Network\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="RoboCat.cpp">
+      <Filter>소스 파일\Type\GameObject</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
