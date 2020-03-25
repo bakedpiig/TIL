@@ -16,6 +16,7 @@ private:
 public:
 	void Read(uint32_t);
 	void Read(uint32_t, uint32_t);
+	void Read(string outData);
 
 	template<typename T>
 	void Read(vector<T>& outVector) {

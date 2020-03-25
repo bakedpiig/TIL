@@ -35,6 +35,7 @@ public:
 	void Write(uint16_t inData, size_t inBitCount = sizeof(uint16_t) * 8) { WriteBits(&inData, inBitCount); }
 	void Write(int16_t inData, size_t inBitCount = sizeof(int16_t) * 8) { WriteBits(&inData, inBitCount); }
 	void Write(int8_t inData, size_t inBitCount = sizeof(int8_t) * 8) { WriteBits(&inData, inBitCount); }
+	void Write(string inData);
 	void Write(bool inData) { WriteBits(&inData, 1); }
 
 	template<typename T>

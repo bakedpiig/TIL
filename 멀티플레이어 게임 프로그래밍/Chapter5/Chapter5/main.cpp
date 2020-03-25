@@ -5,6 +5,7 @@
 #include "RoboMouse.h"
 #include "RoboCheese.h"
 #include "ObjectCreationRegistry.h"
+#include "RelectionSystem.h"
 
 void WriteClassType(OutputMemoryStream& inStream, const GameObject* inGameObject) {
 	if (dynamic_cast<const RoboCat*>(inGameObject))
@@ -32,6 +33,29 @@ GameObject* CreateGameObjectFromStream(InputMemoryBitStream& inStream) {
 		return new RoboMouse();
 	case 'RBCH':
 		return new RoboCheese();
-	
+	}
 	return nullptr;
+}
+
+void Serialize(MemoryStream* inStream, const DataType* inDataType, uint8_t* inData, uint32_t inProperties) {
+	inStream->Serialize(inProperties);
+
+	const auto& mvs = inDataType->GetMemberVariables();
+	for (int mvIndex = 0, c = mvs.size(); mvIndex < c; mvIndex++) {
+		if (((1 << mvIndex) & inProperties) != 0) {
+			const auto& mv = mvs[mvIndex];
+			void* mvData = inData + mv.GetOffset();
+			switch (mv.GetPrimitiveType()) {
+			case EPT_Int:
+				inStream->Serialize(*reinterpret_cast<int*>(mvData));
+				break;
+			case EPT_String:
+				inStream->Serialize(*reinterpret_cast<string*>(mvData));
+				break;
+			case EPT_Float:
+				inStream->Serialize(*reinterpret_cast<float*>(mvData));
+				break;
+			}
+		}
+	}
 }

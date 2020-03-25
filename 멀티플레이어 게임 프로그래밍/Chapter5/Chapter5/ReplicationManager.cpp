@@ -2,6 +2,7 @@
 #include "PacketType.h"
 #include "BitCounter.h"
 #include "ObjectCreationRegistry.h"
+#include "ReplicationHeader.h"
 
 void ReplicationManager::ReplicateIntoStream(OutputMemoryBitStream& inStream, GameObject* inGameObject) {
 	inStream.Write(linkingContext->GetNetworkId(inGameObject, true));
@@ -47,4 +48,49 @@ GameObject* ReplicationManager::ReceiveReplicatedObject(InputMemoryBitStream& in
 
 	go->Read(inStream);
 	return go;
+}
+
+void ReplicationManager::ReplicateCreate(OutputMemoryBitStream& inStream, GameObject* inGameObject) {
+	ReplicationHeader rh(RA_Create, linkingContext->GetNetworkId(inGameObject, false), inGameObject->GetClassId());
+	rh.Write(inStream);
+}
+
+void ReplicationManager::ReplicateUpdate(OutputMemoryBitStream& inStream, GameObject* inGameObject) {
+	ReplicationHeader rh(RA_Update, linkingContext->GetNetworkId(inGameObject, false), inGameObject->GetClassId());
+	rh.Write(inStream);
+}
+
+void ReplicationManager::ReplicateDestroy(OutputMemoryBitStream& inStream, GameObject* inGameObject) {
+	ReplicationHeader rh(RA_Destroy, linkingContext->GetNetworkId(inGameObject, false));
+	rh.Write(inStream);
+}
+
+void ReplicationManager::ProcessReplicationAction(InputMemoryBitStream& inStream) {
+	ReplicationHeader rh;
+	rh.Read(inStream);
+	switch (rh.replicationAction) {
+	case RA_Create:
+		GameObject* go = ObjectCreationRegistry::Get().CreateGameObject(rh.classId);
+		linkingContext->AddGameObject(go, rh.networkId);
+		go->Read(inStream);
+		break;
+	case RA_Update:
+		GameObject* go = linkingContext->GetGameObject(rh.networkId);
+		if (go)
+			go->Read(inStream);
+		else {
+			uint32_t classId = rh.classId;
+			go = ObjectCreationRegistry::Get().CreateGameObject(classId);
+			go->Read(inStream);
+			delete go;
+		}
+		break;
+	case RA_Destroy:
+		GameObject* go = linkingContext->GetGameObject(rh.networkId);
+		linkingContext->RemoveGameObject(go);
+		go->Destroy();
+		break;
+	default:
+		break;
+	}
 }

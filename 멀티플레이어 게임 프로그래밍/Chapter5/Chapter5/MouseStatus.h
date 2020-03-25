@@ -1,7 +1,18 @@
 #pragma once
 #include "RelectionSystem.h"
 #include "MemoryStream.h"
+#include "OutputMemoryBitStream.h"
+#include "InputMemoryBitStream.h"
+
 #define OffsetOf(c, mv) ((size_t) & (static_cast<c*>(nullptr)->mv))
+
+enum MouseStatusProperties {
+	MSP_Name = 1 << 0,
+	MSP_LegCount = 1 << 1,
+	MSP_HeadCount = 1 << 2,
+	MSP_Health = 1 << 3,
+	MSP_MAX
+};
 
 class MouseStatus {
 public:
@@ -10,29 +21,10 @@ public:
 	float health;
 
 	static DataType* dataType;
-	static void InitDataType() {
-		dataType = new DataType({
-			MemberVariable("name",EPT_String,OffsetOf(MouseStatus,name)),
-			MemberVariable("legCount",EPT_Int,OffsetOf(MouseStatus,legCount)),
-			MemberVariable("headCount",EPT_Int,OffsetOf(MouseStatus,headCount)),
-			MemberVariable("health",EPT_Float,OffsetOf(MouseStatus,health))
-			});
-	}
+	static void InitDataType();
 
-	void Serialize(MemoryStream* inMemoryStream, const DataType* inDataType, uint8_t* inData) {
-		for (auto& mv : inDataType->GetMemberVariables()) {
-			void* mvData = inData + mv.GetOffset();
-			switch (mv.GetPrimitiveType()) {
-			case EPT_Int:
-				inMemoryStream->Serialize(*(int*)mvData);
-				break;
-			case EPT_String:
-				inMemoryStream->Serialize(*(std::string*)mvData);
-				break;
-			case EPT_Float:
-				inMemoryStream->Serialize(*(float*)mvData);
-				break;
-			}
-		}
-	}
+	void Serialize(MemoryStream* inMemoryStream, const DataType* inDataType, uint8_t* inData);
+
+	void Write(OutputMemoryBitStream& inStream, uint32_t inProperties);
+	void Read(InputMemoryBitStream& inStream);
 };
