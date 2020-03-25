@@ -52,6 +52,9 @@ public:
 			outQuat.w *= -1;
 	}
 
+	uint32_t GetRemainingBitCount() {
+		return bitCapacity - bitHead;
+	}
 private:
 	uint32_t ConvertToFixed(float inNumber, float inMin, float inPrecision) {
 		return static_cast<uint32_t>((inNumber - inMin) / inPrecision);
