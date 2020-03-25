@@ -23,6 +23,8 @@ public:
 	}
 
 	virtual void Update();
+	
+	CLASS_IDENTIFICATION('RBCT', RoboCat)
 
 	void Write(OutputMemoryStream& inStream) const;
 	void Read(InputMemoryStream& inStream);

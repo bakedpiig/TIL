@@ -154,6 +154,8 @@
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="RelectionSystem.h" />
     <ClInclude Include="RoboCat.h" />
+    <ClInclude Include="RoboCheese.h" />
+    <ClInclude Include="RoboMouse.h" />
     <ClInclude Include="SocketAddress.h" />
     <ClInclude Include="SocketAddressFactory.h" />
     <ClInclude Include="SocketUtil.h" />
