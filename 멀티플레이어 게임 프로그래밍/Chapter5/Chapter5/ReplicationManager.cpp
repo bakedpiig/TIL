@@ -90,6 +90,9 @@ void ReplicationManager::ProcessReplicationAction(InputMemoryBitStream& inStream
 		linkingContext->RemoveGameObject(go);
 		go->Destroy();
 		break;
+	case RA_RPC:
+		rpcManager->ProcessRPC(inStream);
+		break;
 	default:
 		break;
 	}

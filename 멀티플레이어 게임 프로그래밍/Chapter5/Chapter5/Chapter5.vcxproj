@@ -139,6 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Affine.h" />
+    <ClInclude Include="BitCounter.h" />
     <ClInclude Include="ByteSwap.h" />
     <ClInclude Include="ByteSwapper.h" />
     <ClInclude Include="Endian.h" />
@@ -148,14 +149,17 @@
     <ClInclude Include="LinkingContext.h" />
     <ClInclude Include="MemoryStream.h" />
     <ClInclude Include="MouseStatus.h" />
+    <ClInclude Include="ObjectCreationRegistry.h" />
     <ClInclude Include="OutputMemoryBitStream.h" />
     <ClInclude Include="OutputMemoryStream.h" />
     <ClInclude Include="PacketType.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="RelectionSystem.h" />
+    <ClInclude Include="ReplicationManager.h" />
     <ClInclude Include="RoboCat.h" />
     <ClInclude Include="RoboCheese.h" />
     <ClInclude Include="RoboMouse.h" />
+    <ClInclude Include="RPCManager.h" />
     <ClInclude Include="SocketAddress.h" />
     <ClInclude Include="SocketAddressFactory.h" />
     <ClInclude Include="SocketUtil.h" />
@@ -168,9 +172,14 @@
     <ClCompile Include="InputMemoryStream.cpp" />
     <ClCompile Include="LinkingContext.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouseStatus.cpp" />
     <ClCompile Include="OutputMemoryBitStream.cpp" />
     <ClCompile Include="OutputMemoryStream.cpp" />
+    <ClCompile Include="ReplicationHeader.cpp" />
+    <ClCompile Include="ReplicationHeader.h" />
+    <ClCompile Include="ReplicationManager.cpp" />
     <ClCompile Include="RoboCat.cpp" />
+    <ClCompile Include="RPCManager.cpp" />
     <ClCompile Include="SocketUtil.cpp" />
     <ClCompile Include="TCPSocket.cpp" />
     <ClCompile Include="UDPSocket.cpp" />

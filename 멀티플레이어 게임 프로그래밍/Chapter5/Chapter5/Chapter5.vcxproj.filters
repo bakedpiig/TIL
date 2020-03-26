@@ -46,6 +46,12 @@
     <Filter Include="소스 파일\Type\GameObject">
       <UniqueIdentifier>{e2268194-bb84-468c-bd5b-42bc11e8c253}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Network\Replication">
+      <UniqueIdentifier>{765f98a2-8b84-4c5e-b3a3-8a99f667155e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Network\Replication">
+      <UniqueIdentifier>{2fb30aa7-01c5-4f54-900a-782275b792ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Affine.h">
@@ -123,6 +129,18 @@
     <ClInclude Include="RoboCheese.h">
       <Filter>헤더 파일\Type\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectCreationRegistry.h">
+      <Filter>헤더 파일\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="BitCounter.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplicationManager.h">
+      <Filter>헤더 파일\Network\Replication</Filter>
+    </ClInclude>
+    <ClInclude Include="RPCManager.h">
+      <Filter>헤더 파일\Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -151,6 +169,21 @@
     </ClCompile>
     <ClCompile Include="RoboCat.cpp">
       <Filter>소스 파일\Type\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplicationManager.cpp">
+      <Filter>소스 파일\Network\Replication</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplicationHeader.h">
+      <Filter>헤더 파일\Network\Replication</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplicationHeader.cpp">
+      <Filter>소스 파일\Network\Replication</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseStatus.cpp">
+      <Filter>소스 파일\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="RPCManager.cpp">
+      <Filter>소스 파일\Network</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

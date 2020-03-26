@@ -3,6 +3,7 @@
 #include "LinkingContext.h"
 #include "OutputMemoryBitStream.h"
 #include "InputMemoryBitStream.h"
+#include "RPCManager.h"
 using namespace std;
 
 class ReplicationManager {
@@ -21,4 +22,5 @@ private:
 
 	LinkingContext* linkingContext;
 	unordered_set<GameObject*> objectsReplicatedToMe;
+	RPCManager* rpcManager;
 };

@@ -6,6 +6,7 @@ enum ReplicationAction {
 	RA_Create,
 	RA_Update,
 	RA_Destroy,
+	RA_RPC,
 	RA_MAX
 };
 

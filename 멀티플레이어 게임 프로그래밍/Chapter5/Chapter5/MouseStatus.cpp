@@ -1,4 +1,5 @@
 #include "MouseStatus.h"
+#include "BitCounter.h"
 
 void MouseStatus::InitDataType() {
 	dataType = new DataType({
@@ -24,4 +25,31 @@ void MouseStatus::Serialize(MemoryStream* inMemoryStream, const DataType* inData
 			break;
 		}
 	}
+}
+
+void MouseStatus::Write(OutputMemoryBitStream& inStream, uint32_t inProperties) {
+	inStream.Write(inProperties, GetRequiredBits(MSP_MAX));
+
+	if ((inProperties & MSP_Name) != 0)
+		inStream.Write(name);
+	if ((inProperties & MSP_LegCount) != 0)
+		inStream.Write(legCount);
+	if ((inProperties & MSP_HeadCount) != 0)
+		inStream.Write(headCount);
+	if ((inProperties & MSP_Health) != 0)
+		inStream.Write(health);
+}
+
+void MouseStatus::Read(InputMemoryBitStream& inStream) {
+	uint32_t writtenProperties;
+	inStream.Read(writtenProperties, GetRequiredBits(MSP_MAX));
+
+	if ((writtenProperties & MSP_Name) != 0)
+		inStream.Read(name);
+	if ((writtenProperties & MSP_LegCount) != 0)
+		inStream.Read(legCount);
+	if ((writtenProperties & MSP_HeadCount) != 0)
+		inStream.Read(headCount);
+	if ((writtenProperties & MSP_Health) != 0)
+		inStream.Read(health);
 }

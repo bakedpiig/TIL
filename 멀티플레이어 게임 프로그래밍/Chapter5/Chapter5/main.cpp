@@ -6,6 +6,7 @@
 #include "RoboCheese.h"
 #include "ObjectCreationRegistry.h"
 #include "RelectionSystem.h"
+#include "RPCManager.h"
 
 void WriteClassType(OutputMemoryStream& inStream, const GameObject* inGameObject) {
 	if (dynamic_cast<const RoboCat*>(inGameObject))
@@ -58,4 +59,21 @@ void Serialize(MemoryStream* inStream, const DataType* inDataType, uint8_t* inDa
 			}
 		}
 	}
+}
+
+void PlaySound(string name, Vector3 location, float volume);
+
+void UnwrapPlaySound(InputMemoryBitStream& inStream) {
+	string soundName;
+	Vector3 location;
+	float volume;
+
+	inStream.Read(soundName);
+	inStream.Read(location);
+	inStream.Read(volume);
+	PlaySound(soundName, location, volume);
+}
+
+void RegisterRPCs(RPCManager* inRPCManager) {
+	inRPCManager->RegisterUnwrapFunction('PSND', UnwrapPlaySound);
 }
